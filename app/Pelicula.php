@@ -19,9 +19,14 @@ class Pelicula extends Model
         return $this->belongsToMany('App\Genero');
     }
 
-    public function votos()
+    //  public function votos()
+    // {
+    //    return $this->belongsToMany('App\voto');
+    //}
+
+    public function votopeliculas()
     {
-        return $this->belongsToMany('App\voto');
+        return $this->hasMany('App\Votopelicula');
     }
 
     public function carteleras()

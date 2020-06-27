@@ -18,13 +18,18 @@ class Producto extends Model
         return $this->belongsToMany('App\Clasifproducto');
     }
 
-    public function votos()
-    {
-        return $this->belongsToMany('App\Voto');
-    }
+  //  public function votos()
+  //  {
+ //       return $this->belongsToMany('App\Voto');
+  //  }
 
     public function encabezados()
     {
         return $this->belongsToMany('App\Encabezado');
+    }
+
+    public function votoproductoss()
+    {
+        return $this->hasMany('App\votoproducto');
     }
 }
