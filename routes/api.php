@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Routing\RouteGroup;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +15,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+//prefix es la palabra que se agrega a la url
+Route::group(['prefix' => 'v1'], function () {
+    Route::group(['prefix' => 'peliculas'], function () {
+        //primer parametro el nombre por el que nos referimos a la ruta
+        //segundo el controlador y la accion que va a llamar
+        Route::get('', 'PeliculaController@index');
+    });
+});
+
+Route::group(['prefix' => 'v1'], function () {
+    Route::group(['prefix' => 'peliculasfiltro'], function () {
+        //primer parametro es el parametro que vamos a enviar en la busqueda
+        //segundo el controlador y la accion que va a llamar
+
+        Route::get('/{id}', 'PeliculaController@filtroNombre');
+    });
 });

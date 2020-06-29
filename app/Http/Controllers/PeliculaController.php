@@ -12,9 +12,53 @@ class PeliculaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    //consultas para mostrar info
     public function index()
     {
-        //
+
+        try {
+            //traer todas las columnas, no tengo que dar formato
+            // $peli=Pelicula::all();
+
+            //withcount, poner nombre del metodo en el modelo con la relacion
+            // $peli = Pelicula::orderBy('clasificacion_id', 'desc')->withCount('votopeliculas')->get();
+
+            $peli = Pelicula::where('estado', true)->orderBy('clasificacion_id', 'desc')->withCount('votopeliculas')->get();
+            //mostrar consulta en una respuesta
+            //en formato json
+            //armar array
+            $response = [$peli];
+
+            //response autocompletado
+            // 200 es ok
+            return response()->json($response, 200);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage(), 422);
+        }
+    }
+
+    public function filtroNombre($id)
+    {
+
+        try {
+            //traer todas las columnas, no tengo que dar formato
+            // $peli=Pelicula::all();
+
+            //withcount, poner nombre del metodo en el modelo con la relacion
+            // $peli = Pelicula::orderBy('clasificacion_id', 'desc')->withCount('votopeliculas')->get();
+
+            $peli = Pelicula::where('id', $id)->orderBy('clasificacion_id', 'desc')->withCount('votopeliculas')->first();
+            //mostrar consulta en una respuesta
+            //en formato json
+            //armar array
+            $response = [$peli];
+
+            //response autocompletado
+            // 200 es ok
+            return response()->json($response, 200);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage(), 422);
+        }
     }
 
     /**
