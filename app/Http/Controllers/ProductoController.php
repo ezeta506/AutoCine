@@ -14,9 +14,51 @@ class ProductoController extends Controller
      */
     public function index()
     {
-        //
+
+        try {
+            //traer todas las columnas, no tengo que dar formato
+            // $peli=Pelicula::all();
+
+            //withcount, poner nombre del metodo en el modelo con la relacion
+            // $peli = Pelicula::orderBy('clasificacion_id', 'desc')->withCount('votopeliculas')->get();
+
+            $peli = Producto::where('estado', true)->orderBy('clasifproducto_id', 'desc')->withCount('votoproductoss')->get();
+            //mostrar consulta en una respuesta
+            //en formato json
+            //armar array
+            $response = [$peli];
+
+            //response autocompletado
+            // 200 es ok
+            return response()->json($response, 200);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage(), 422);
+        }
     }
 
+    public function filtroId($id)
+    {
+
+        try {
+            //traer todas las columnas, no tengo que dar formato
+            // $peli=Pelicula::all();
+
+            //withcount, poner nombre del metodo en el modelo con la relacion
+            // $peli = Pelicula::orderBy('clasificacion_id', 'desc')->withCount('votopeliculas')->get();
+
+            $peli = Producto::where('id', $id)->orderBy('clasifproducto_id', 'desc')->withCount('votoproductoss')->first();
+            //mostrar consulta en una respuesta
+            //en formato json
+            //armar array
+            $response = [$peli];
+
+            //response autocompletado
+            // 200 es ok
+            return response()->json($response, 200);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage(), 422);
+        }
+    }
     /**
      * Show the form for creating a new resource.
      *

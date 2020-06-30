@@ -32,3 +32,12 @@ Route::group(['prefix' => 'v1'], function () {
         Route::get('/{id}', 'PeliculaController@filtroNombre');
     });
 });
+
+Route::group(['prefix' => 'v1'], function () {
+    Route::group(['prefix' => 'productos'], function () {
+        //primer parametro el nombre por el que nos referimos a la ruta
+        //segundo el controlador y la accion que va a llamar
+        Route::get('', 'ProductoController@index');
+        Route::get('/{id}', 'ProductoController@filtroId');
+    });
+});
