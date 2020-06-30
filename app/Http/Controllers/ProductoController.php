@@ -22,7 +22,7 @@ class ProductoController extends Controller
             //withcount, poner nombre del metodo en el modelo con la relacion
             // $peli = Pelicula::orderBy('clasificacion_id', 'desc')->withCount('votopeliculas')->get();
 
-            $peli = Producto::where('estado', true)->orderBy('clasifproducto_id', 'desc')->withCount('votoproductoss')->get();
+            $peli = Producto::where('estado', true)->orderBy('tipoproducto_id', 'desc')->withCount('votoproductoss')->get();
             //mostrar consulta en una respuesta
             //en formato json
             //armar array
@@ -46,7 +46,7 @@ class ProductoController extends Controller
             //withcount, poner nombre del metodo en el modelo con la relacion
             // $peli = Pelicula::orderBy('clasificacion_id', 'desc')->withCount('votopeliculas')->get();
 
-            $peli = Producto::where('id', $id)->orderBy('clasifproducto_id', 'desc')->withCount('votoproductoss')->first();
+            $peli = Producto::where('id', $id)->orderBy('tipoproducto_id', 'desc')->withCount('votoproductoss')->first();
             //mostrar consulta en una respuesta
             //en formato json
             //armar array
