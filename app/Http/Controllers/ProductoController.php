@@ -26,7 +26,7 @@ class ProductoController extends Controller
             //mostrar consulta en una respuesta
             //en formato json
             //armar array
-            $response = [$peli];
+            $response = $peli;
 
             //response autocompletado
             // 200 es ok
@@ -50,7 +50,7 @@ class ProductoController extends Controller
             //mostrar consulta en una respuesta
             //en formato json
             //armar array
-            $response = [$peli];
+            $response = $peli;
 
             //response autocompletado
             // 200 es ok
