@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Voto;
+use App\Votopelicula;
 use Illuminate\Http\Request;
 
-class VotoController extends Controller
+class VotopeliculaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class VotoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Voto  $voto
+     * @param  \App\Votopelicula  $votopelicula
      * @return \Illuminate\Http\Response
      */
-    public function show(Voto $voto)
+    public function show(Votopelicula $votopelicula)
     {
         //
     }
@@ -52,10 +52,10 @@ class VotoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Voto  $voto
+     * @param  \App\Votopelicula  $votopelicula
      * @return \Illuminate\Http\Response
      */
-    public function edit(Voto $voto)
+    public function edit(Votopelicula $votopelicula)
     {
         //
     }
@@ -64,10 +64,10 @@ class VotoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Voto  $voto
+     * @param  \App\Votopelicula  $votopelicula
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Voto $voto)
+    public function update(Request $request, Votopelicula $votopelicula)
     {
         //
     }
@@ -75,10 +75,10 @@ class VotoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Voto  $voto
+     * @param  \App\Votopelicula  $votopelicula
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Voto $voto)
+    public function destroy(Votopelicula $votopelicula)
     {
         //
     }

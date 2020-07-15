@@ -36,4 +36,20 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    //metodos de las relaciones
+
+    //nombre del metodo: si es belongsTo se bebe ser un nombre en singular
+    //nombre del modelo con el que me relaciono
+    //App, hace referencia a la carpeta dondo estoy
+    //segundo parametro es con quien establezco la relacion
+    public function rol()
+    {
+        return $this->belongsTo('App\Rol');
+    }
+
+    public function encabezados()
+    {
+        return $this->hasMany('App\Encabezado');
+    }
 }
