@@ -23,9 +23,13 @@ class TipoproductoSeeder extends Seeder
         $tipoproducto->save();
 
 
-
         $tipoproducto = new \App\Tipoproducto();
         $tipoproducto->name = "Snacks";
+        $tipoproducto->estado = true;
+        $tipoproducto->save();
+
+        $tipoproducto = new \App\Tipoproducto();
+        $tipoproducto->name = "Helados";
         $tipoproducto->estado = true;
         $tipoproducto->save();
     }

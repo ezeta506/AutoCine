@@ -47,7 +47,7 @@ class PeliculaController extends Controller
             //withcount, poner nombre del metodo en el modelo con la relacion
             // $peli = Pelicula::orderBy('clasificacion_id', 'desc')->withCount('votopeliculas')->get();
 
-            $peli = Pelicula::where('id', $id)->orderBy('clasificacion_id', 'desc')->withCount('votopeliculas')->first();
+            $peli = Pelicula::where('id', $id)->orderBy('clasificacion_id', 'desc')->withCount('votopeliculas')->with(['clasificacion'])->first();
             //mostrar consulta en una respuesta
             //en formato json
             //armar array
