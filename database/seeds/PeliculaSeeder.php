@@ -14,7 +14,7 @@ class PeliculaSeeder extends Seeder
         $pelicula = new \App\Pelicula();
         $pelicula->name = "Ironman";
         $pelicula->sinopsis = "Tony hace traje de acero para luchar por la justicia";
-        $pelicula->imagen = "";
+        $pelicula->imagen = "./assets/img_productos/ironman.jpg";
         $pelicula->clasificacion_id = 1;
         $pelicula->estado = true;
         $pelicula->save();
@@ -22,7 +22,7 @@ class PeliculaSeeder extends Seeder
         $pelicula = new \App\Pelicula();
         $pelicula->name = "La monja";
         $pelicula->sinopsis = "Todos están en peligro en un viejo convento";
-        $pelicula->imagen = "";
+        $pelicula->imagen = "./assets/img_productos/monja.jpg";
         $pelicula->clasificacion_id = 2;
         $pelicula->estado = true;
         $pelicula->save();
@@ -30,7 +30,7 @@ class PeliculaSeeder extends Seeder
         $pelicula = new \App\Pelicula();
         $pelicula->name = "The Notebook";
         $pelicula->sinopsis = "Relato de amor";
-        $pelicula->imagen = "";
+        $pelicula->imagen = "./assets/img_productos/notebook.jpg";
         $pelicula->clasificacion_id = 1;
         $pelicula->estado = true;
         $pelicula->save();
