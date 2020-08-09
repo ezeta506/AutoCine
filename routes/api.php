@@ -15,26 +15,38 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+
 //prefix es la palabra que se agrega a la url
 Route::group(['prefix' => 'v1'], function () {
     Route::group(['prefix' => 'peliculas'], function () {
+        Route::group(['prefix' => 'auth'], function ($router) {
+            Route::post('register', 'AuthController@register');
+            Route::post('login', 'AuthController@login');
+            Route::post('logout', 'AuthController@logout');
+            Route::post('refresh', 'AuthController@refresh');
+            Route::post('me', 'AuthController@me');
+        });
         //primer parametro el nombre por el que nos referimos a la ruta
         //segundo el controlador y la accion que va a llamar
         Route::get('', 'PeliculaController@index');
-    });
-});
-
-Route::group(['prefix' => 'v1'], function () {
-    Route::group(['prefix' => 'peliculasfiltro'], function () {
-        //primer parametro es el parametro que vamos a enviar en la busqueda
-        //segundo el controlador y la accion que va a llamar
-
+        Route::post('', 'PeliculaController@store');
+        Route::patch('/{id}', 'PeliculaController@update');
         Route::get('/{id}', 'PeliculaController@filtroNombre');
     });
 });
 
+
+
 Route::group(['prefix' => 'v1'], function () {
     Route::group(['prefix' => 'productos'], function () {
+        Route::group(['prefix' => 'auth'], function ($router) {
+            Route::post('register', 'AuthController@register');
+            Route::post('login', 'AuthController@login');
+            Route::post('logout', 'AuthController@logout');
+            Route::post('refresh', 'AuthController@refresh');
+            Route::post('me', 'AuthController@me');
+        });
         //primer parametro el nombre por el que nos referimos a la ruta
         //segundo el controlador y la accion que va a llamar
         Route::get('', 'ProductoController@index');
