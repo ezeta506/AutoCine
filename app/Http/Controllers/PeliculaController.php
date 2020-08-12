@@ -103,12 +103,18 @@ class PeliculaController extends Controller
             return $this->responseErrors($e->errors(),422);
         }
         //instancia de pelicula
+        //tambien se puede poner el nombre del campo sin el input
         $peli = new Pelicula();
         $peli->name=$request->input('name');
         $peli->sinopsis = $request->input('sinopsis');
         $peli->imagen = $request->input('imagen');
         $peli->clasificacion_id = $request->input('clasificacion_id');
         $peli->estado = $request->input('estado');
+        //tres iguales es para comparar que tenga el valor y el tipo
+        // los request son las entradas
+        //si no hay generos le asigna uno vacio, si hay le asigno el que viene
+        //el atach toma el id de peli y el de generos y los guarda en la tabla intermedia
+        // si ocupo en un array le puedo enviar más datos a la tabla intermedi. ver documentación
         if ($peli->save()) {
             $peli->generos()->attach(
                 $request->input('generos')===null?[]:$request->input('generos')
@@ -150,9 +156,43 @@ class PeliculaController extends Controller
      * @param  \App\Pelicula  $pelicula
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Pelicula $pelicula)
+    public function update(Request $request, $id)
     {
-        //
+        try {
+            $this->validate($request, [
+                //no dejar espacios
+                'name' => 'required|min:20',
+                'sinopsis' => 'required|min:20',
+                'imagen' => 'required',
+                'clasificacion_id' => 'required',
+                'estado' => 'required'
+            ]);
+            if (!$user = JWTAuth::parseToken()->authenticate()) {
+                return response()->json(['msg' => 'Usuario no encontrado'], 404);
+            }
+        } catch
+        (\Illuminate\Validation\ValidationException $e) {
+            return $this->responseErrors($e->errors(), 422);
+        }
+
+        $peli = Pelicula::find($id);
+        $peli->name = $request->input('name');
+        $peli->sinopsis = $request->input('sinopsis');
+        $peli->imagen = $request->input('imagen');
+        $peli->clasificacion_id = $request->input('clasificacion_id');
+        $peli->estado = $request->input('estado');
+
+        if ($peli->update()) {
+            $peli->generos()->sync(
+                $request->input('generos') === null ? [] : $request->input('generos')
+            );
+            $response = 'pelicula actualizada';
+            return response()->json($response, 200);
+        } else {
+            $response = ['msg' => 'error durante la actualización'];
+            return response()->json($response, 404);
+        }
+
     }
 
     /**
