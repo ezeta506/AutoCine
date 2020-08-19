@@ -30,6 +30,7 @@ Route::group(['prefix' => 'v1'], function () {
         //primer parametro el nombre por el que nos referimos a la ruta
         //segundo el controlador y la accion que va a llamar
         Route::get('', 'PeliculaController@index');
+        Route::get('peliculaDeshabilitada', 'PeliculaController@peliculaDeshabilitada');
         Route::get('genero', 'GeneroController@index');
         Route::post('', 'PeliculaController@store');
         Route::patch('/{id}', 'PeliculaController@update');
@@ -51,6 +52,7 @@ Route::group(['prefix' => 'v1'], function () {
         //primer parametro el nombre por el que nos referimos a la ruta
         //segundo el controlador y la accion que va a llamar
         Route::get('', 'ProductoController@index');
+        Route::get('productoDeshabilitado', 'ProductoController@productoDeshabilitado');
         Route::get('tipoproducto', 'TipoproductoController@index');
         Route::get('clasifproducto', 'ClasifproductoController@index');
         Route::post('', 'ProductoController@store');
@@ -68,6 +70,5 @@ Route::group(['prefix' => 'v1'], function () {
         //segundo el controlador y la accion que va a llamar
         Route::get('ubicacion', 'UbicacionController@index');
         Route::get('/{id}', 'CarteleraController@filtroUbicacion');
-
     });
 });
