@@ -10,8 +10,9 @@ use JWTAuth;
 class PeliculaController extends Controller
 {
 
-    public function __construct(){
-        $this->middleware('jwt.auth', ['only'=>['store']]);
+    public function __construct()
+    {
+        $this->middleware('jwt.auth', ['only' => ['store']]);
     }
 
     /**
@@ -87,25 +88,25 @@ class PeliculaController extends Controller
     public function store(Request $request)
     {
         try {
-           $this->validate($request,[
-               //no dejar espacios
-               'name'=> 'required|min:20',
+            $this->validate($request, [
+                //no dejar espacios
+                'name' => 'required|min:2',
                 'sinopsis' => 'required|min:20',
                 'imagen' => 'required',
                 'clasificacion_id' => 'required',
                 'estado' => 'required'
-           ]);
-           if(!$user= JWTAuth::parseToken()->authenticate()){
-               return response()->json(['msg'=>'Usuario no encontrado'], 404);
-           }
-       } catch (\Illuminate\Validation\ValidationException $e) {
+            ]);
+            if (!$user = JWTAuth::parseToken()->authenticate()) {
+                return response()->json(['msg' => 'Usuario no encontrado'], 404);
+            }
+        } catch (\Illuminate\Validation\ValidationException $e) {
 
-            return $this->responseErrors($e->errors(),422);
+            return $this->responseErrors($e->errors(), 422);
         }
         //instancia de pelicula
         //tambien se puede poner el nombre del campo sin el input
         $peli = new Pelicula();
-        $peli->name=$request->input('name');
+        $peli->name = $request->input('name');
         $peli->sinopsis = $request->input('sinopsis');
         $peli->imagen = $request->input('imagen');
         $peli->clasificacion_id = $request->input('clasificacion_id');
@@ -117,12 +118,12 @@ class PeliculaController extends Controller
         // si ocupo en un array le puedo enviar más datos a la tabla intermedi. ver documentación
         if ($peli->save()) {
             $peli->generos()->attach(
-                $request->input('generos')===null?[]:$request->input('generos')
+                $request->input('generos') === null ? [] : $request->input('generos')
             );
             $response = 'pelicula creada';
             return response()->json($response, 201);
-        }else{
-            $response=['msg'=>'error durante la creacion'];
+        } else {
+            $response = ['msg' => 'error durante la creacion'];
             return response()->json($response, 404);
         }
     }
@@ -170,8 +171,7 @@ class PeliculaController extends Controller
             if (!$user = JWTAuth::parseToken()->authenticate()) {
                 return response()->json(['msg' => 'Usuario no encontrado'], 404);
             }
-        } catch
-        (\Illuminate\Validation\ValidationException $e) {
+        } catch (\Illuminate\Validation\ValidationException $e) {
             return $this->responseErrors($e->errors(), 422);
         }
 
@@ -192,7 +192,6 @@ class PeliculaController extends Controller
             $response = ['msg' => 'error durante la actualización'];
             return response()->json($response, 404);
         }
-
     }
 
     /**
@@ -204,5 +203,21 @@ class PeliculaController extends Controller
     public function destroy(Pelicula $pelicula)
     {
         //
+    }
+
+    public function responseErrors($errors, $statusHTML)
+    {
+        $transformed = [];
+
+        foreach ($errors as $field => $message) {
+            $transformed[] = [
+                'field' => $field,
+                'message' => $message[0]
+            ];
+        }
+
+        return response()->json([
+            'errors' => $transformed
+        ], $statusHTML);
     }
 }
