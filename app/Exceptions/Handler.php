@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -50,6 +51,9 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
+        if ($exception instanceof UnauthorizedHttpException) {
+            return response()->json('No autorizado', 401);
+        }
         return parent::render($request, $exception);
     }
 }
