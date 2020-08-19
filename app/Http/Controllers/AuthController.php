@@ -17,23 +17,41 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         try { //Validación de las entradas
-             $this->validate($request, [ 'name' => 'required', 'email' => 'required|email|unique:users,email', 'password' => 'required|min:6' ]); } catch (\Illuminate\Validation\ValidationException $e) {
-                 //Captura de los errores de validación
-                 return $this->responseErrors($e->errors(), 422); } try {
-                     //Instancia con la información del usuario
-                      $user = new User();
-                      $user->name = $request->name;
-                      $user->email = $request->email;
-                    $user->password = bcrypt($request->password);
+            $this->validate(
+                $request,
+                [
+                    'name' => 'required',
+                    'apellido1' => 'required',
+                    'apellido2' => 'required',
+                    'email' => 'required|email|unique:users,email',
+                    'password' => 'required|min:6',
+                    'rol_id' => 'required',
+                    'estado' => 'required'
+                ]
+            );
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            //Captura de los errores de validación
+            return $this->responseErrors($e->errors(), 422);
+        }
+        try {
+            //Instancia con la información del usuario
+            $user = new User();
+            $user->name = $request->name;
+            $user->apellido1 = $request->apellido1;
+            $user->apellido2 = $request->apellido2;
+            $user->email = $request->email;
+            $user->password = bcrypt($request->password);
             $user->rol_id = $request->rol_id;
-             //Insertar el usuario
-              $user->save();
-               //Retornar información del usuario
-               return response()->json($user, 201); } catch (\Exception $e) {
-                    //Captura de errores al insertar el usuario
-                     return response()->json($e->getMessage(), 422);
-                     }
-                    }
+            $user->estado = $request->estado;
+            //Insertar el usuario
+            $user->save();
+            //Retornar información del usuario
+            return response()->json($user, 201);
+        } catch (\Exception $e) {
+            //Captura de errores al insertar el usuario
+            return response()->json($e->getMessage(), 422);
+        }
+    }
 
     /**
      * * Get a JWT via given credentials.
@@ -108,7 +126,4 @@ class AuthController extends Controller
         }
         return response()->json(['errors' => $transformed], $statusHTML);
     }
-
-
-
 }
