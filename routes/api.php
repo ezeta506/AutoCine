@@ -30,6 +30,7 @@ Route::group(['prefix' => 'v1'], function () {
         //primer parametro el nombre por el que nos referimos a la ruta
         //segundo el controlador y la accion que va a llamar
         Route::get('', 'PeliculaController@index');
+        Route::get('genero', 'GeneroController@index');
         Route::post('', 'PeliculaController@store');
         Route::patch('/{id}', 'PeliculaController@update');
         Route::get('/{id}', 'PeliculaController@filtroNombre');
@@ -50,8 +51,23 @@ Route::group(['prefix' => 'v1'], function () {
         //primer parametro el nombre por el que nos referimos a la ruta
         //segundo el controlador y la accion que va a llamar
         Route::get('', 'ProductoController@index');
+        Route::get('tipoproducto', 'TipoproductoController@index');
+        Route::get('clasifproducto', 'ClasifproductoController@index');
         Route::post('', 'ProductoController@store');
         Route::patch('/{id}', 'ProductoController@update');
         Route::get('/{id}', 'ProductoController@filtroId');
+    });
+});
+
+
+//prefix es la palabra que se agrega a la url
+Route::group(['prefix' => 'v1'], function () {
+    Route::group(['prefix' => 'carteleras'], function () {
+
+        //primer parametro el nombre por el que nos referimos a la ruta
+        //segundo el controlador y la accion que va a llamar
+        Route::get('ubicacion', 'UbicacionController@index');
+        Route::get('/{id}', 'CarteleraController@filtroUbicacion');
+
     });
 });

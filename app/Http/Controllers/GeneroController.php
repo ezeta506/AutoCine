@@ -14,7 +14,25 @@ class GeneroController extends Controller
      */
     public function index()
     {
-        //
+        try {
+            //traer todas las columnas, no tengo que dar formato
+            // $peli=Pelicula::all();
+
+            //withcount, poner nombre del metodo en el modelo con la relacion
+            // $peli = Pelicula::orderBy('clasificacion_id', 'desc')->withCount('votopeliculas')->get();
+
+            $genero = Genero::where('estado', true)->get();
+            //mostrar consulta en una respuesta
+            //en formato json
+            //armar array
+            $response = $genero;
+
+            //response autocompletado
+            // 200 es ok
+            return response()->json($response, 200);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage(), 422);
+        }
     }
 
     /**
