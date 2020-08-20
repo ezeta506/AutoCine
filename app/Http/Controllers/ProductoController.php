@@ -182,9 +182,49 @@ class ProductoController extends Controller
      * @param  \App\Producto  $producto
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Producto $producto)
+    public function update(Request $request,  $id)
     {
-        //
+        try {
+            $this->validate($request, [
+                //no dejar espacios
+                'name' => 'required|min:3',
+                'descripcion' => 'required|min:20',
+                'imagen' => 'required',
+                'tipoproducto_id' => 'required',
+                'precio' => 'required',
+                'estado' => 'required'
+            ]);
+            if (!$user = JWTAuth::parseToken()->authenticate()) {
+                return response()->json(['msg' => 'Usuario no encontrado'], 404);
+            }
+        } catch (\Illuminate\Validation\ValidationException $e) {
+
+            return $this->responseErrors($e->errors(), 422);
+        }
+        //instancia de pelicula
+        //tambien se puede poner el nombre del campo sin el input
+        $pro = Producto::find($id);
+        $pro->name = $request->input('name');
+        $pro->descripcion = $request->input('descripcion');
+        $pro->imagen = $request->input('imagen');
+        $pro->tipoproducto_id = $request->input('tipoproducto_id');
+        $pro->precio = $request->input('precio');
+        $pro->estado = $request->input('estado');
+        //tres iguales es para comparar que tenga el valor y el tipo
+        // los request son las entradas
+        //si no hay generos le asigna uno vacio, si hay le asigno el que viene
+        //el atach toma el id de peli y el de generos y los guarda en la tabla intermedia
+        // si ocupo en un array le puedo enviar más datos a la tabla intermedi. ver documentación
+        if ($pro->update()) {
+            $pro->clasifproductos()->sync(
+                $request->input('clasifproductos') === null ? [] : $request->input('clasifproductos')
+            );
+            $response = 'producto actualizado';
+            return response()->json($response, 201);
+        } else {
+            $response = ['msg' => 'error durante la actualización'];
+            return response()->json($response, 404);
+        }
     }
 
     /**
