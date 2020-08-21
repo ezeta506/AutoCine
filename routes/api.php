@@ -59,7 +59,7 @@ Route::group(['prefix' => 'v1'], function () {
         Route::get('tipoproducto', 'TipoproductoController@index');
         Route::get('clasifproducto', 'ClasifproductoController@index');
         Route::post('', 'ProductoController@store');
-      //  Route::post('/{id}', 'VotoproductoController@store');
+        //  Route::post('/{id}', 'VotoproductoController@store');
         Route::post('/{id}', 'DislikeproductoController@store');
         Route::patch('/{id}', 'ProductoController@update');
         Route::get('/{id}', 'ProductoController@filtroId');
@@ -74,6 +74,7 @@ Route::group(['prefix' => 'v1'], function () {
         //primer parametro el nombre por el que nos referimos a la ruta
         //segundo el controlador y la accion que va a llamar
         Route::get('ubicacion', 'UbicacionController@index');
-        Route::get('/{id}', 'CarteleraController@filtroUbicacion');
+        Route::get('', 'CarteleraController@index');
+        Route::post('', 'CarteleraController@store');
     });
 });
