@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Dislikeproducto;
+use App\Producto;
 use Illuminate\Http\Request;
 
 class DislikeproductoController extends Controller

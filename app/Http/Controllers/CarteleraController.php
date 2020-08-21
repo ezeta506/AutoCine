@@ -69,7 +69,7 @@ class CarteleraController extends Controller
             //withcount, poner nombre del metodo en el modelo con la relacion
             // $peli = Pelicula::orderBy('clasificacion_id', 'desc')->withCount('votopeliculas')->get();
 
-            $carte = Cartelera::where('ubicacion_id', $id)->orderBy('id', 'desc')->with(['pelicula', 'ubicacion', 'tiquetes'])->get();
+            $carte = Cartelera::where('ubicacion_id', $id )->orderBy('id', 'desc')->with(['pelicula', 'ubicacion', 'tiquetes'])->get();
             //mostrar consulta en una respuesta
             //en formato json
             //armar array
