@@ -31,7 +31,7 @@ class PeliculaController extends Controller
             //withcount, poner nombre del metodo en el modelo con la relacion
             // $peli = Pelicula::orderBy('clasificacion_id', 'desc')->withCount('votopeliculas')->get();
 
-            $peli = Pelicula::where('estado', true)->orderBy('clasificacion_id', 'desc')->withCount('votopeliculas')->get();
+            $peli = Pelicula::where('estado', true)->orderBy('clasificacion_id', 'desc')->withCount('votopeliculas')->withCount('dislikepeliculas')->with(['clasificacion', 'generos'])->get();
             //mostrar consulta en una respuesta
             //en formato json
             //armar array
@@ -55,7 +55,7 @@ class PeliculaController extends Controller
             //withcount, poner nombre del metodo en el modelo con la relacion
             // $peli = Pelicula::orderBy('clasificacion_id', 'desc')->withCount('votopeliculas')->get();
 
-            $peli = Pelicula::where('estado', false)->orderBy('clasificacion_id', 'desc')->withCount('votopeliculas')->get();
+            $peli = Pelicula::where('estado', false)->orderBy('clasificacion_id', 'desc')->withCount('votopeliculas')->withCount('dislikepeliculas')->with(['clasificacion', 'generos'])->get();
             //mostrar consulta en una respuesta
             //en formato json
             //armar array
@@ -79,7 +79,7 @@ class PeliculaController extends Controller
             //withcount, poner nombre del metodo en el modelo con la relacion
             // $peli = Pelicula::orderBy('clasificacion_id', 'desc')->withCount('votopeliculas')->get();
 
-            $peli = Pelicula::where('id', $id)->orderBy('clasificacion_id', 'desc')->withCount('votopeliculas')->with(['clasificacion'])->first();
+            $peli = Pelicula::where('id', $id)->orderBy('clasificacion_id', 'desc')->withCount('votopeliculas')->withCount('dislikepeliculas')->with(['clasificacion', 'generos'])->first();
             //mostrar consulta en una respuesta
             //en formato json
             //armar array

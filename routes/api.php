@@ -31,8 +31,11 @@ Route::group(['prefix' => 'v1'], function () {
         //segundo el controlador y la accion que va a llamar
         Route::get('', 'PeliculaController@index');
         Route::get('peliculaDeshabilitada', 'PeliculaController@peliculaDeshabilitada');
+        Route::get('clasificacion', 'ClasificacionController@index');
         Route::get('genero', 'GeneroController@index');
         Route::post('', 'PeliculaController@store');
+        Route::post('/{id}', 'VotopeliculaController@store');
+        Route::post('dislike/{id}', 'DislikepeliculaController@store');
         Route::patch('/{id}', 'PeliculaController@update');
         Route::get('/{id}', 'PeliculaController@filtroNombre');
     });
@@ -56,6 +59,8 @@ Route::group(['prefix' => 'v1'], function () {
         Route::get('tipoproducto', 'TipoproductoController@index');
         Route::get('clasifproducto', 'ClasifproductoController@index');
         Route::post('', 'ProductoController@store');
+      //  Route::post('/{id}', 'VotoproductoController@store');
+        Route::post('/{id}', 'DislikeproductoController@store');
         Route::patch('/{id}', 'ProductoController@update');
         Route::get('/{id}', 'ProductoController@filtroId');
     });

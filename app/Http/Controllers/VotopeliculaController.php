@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Pelicula;
 use App\Votopelicula;
 use Illuminate\Http\Request;
 
@@ -33,9 +34,21 @@ class VotopeliculaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($id)
     {
-        //
+        $peli = Pelicula::with('votopeliculas')->findOrFail($id);
+        $Votopelicula = new Votopelicula();
+        if ($peli->votopeliculas()->save($Votopelicula)) {
+
+            return response()->json('Voto registrado!', 201);
+        }
+
+        $response = [
+            'msg' => 'Error durante el registro del voto'
+        ];
+
+        return response()->json($response, 404);
+    
     }
 
     /**

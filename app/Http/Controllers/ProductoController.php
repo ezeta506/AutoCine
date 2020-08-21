@@ -31,7 +31,7 @@ class ProductoController extends Controller
             //withcount, poner nombre del metodo en el modelo con la relacion
             // $peli = Pelicula::orderBy('clasificacion_id', 'desc')->withCount('votopeliculas')->get();
 
-            $peli = Producto::where('estado', true)->orderBy('tipoproducto_id', 'desc')->withCount('votoproductoss')->get();
+            $peli = Producto::where('estado', true)->orderBy('tipoproducto_id', 'desc')->withCount('votoproductos')->withCount('dislikeproductos')->with(['tipoproducto', 'clasifproductos'])->get();
             //mostrar consulta en una respuesta
             //en formato json
             //armar array
@@ -55,7 +55,7 @@ class ProductoController extends Controller
             //withcount, poner nombre del metodo en el modelo con la relacion
             // $peli = Pelicula::orderBy('clasificacion_id', 'desc')->withCount('votopeliculas')->get();
 
-            $peli = Producto::where('estado', false)->orderBy('tipoproducto_id', 'desc')->withCount('votoproductoss')->get();
+            $peli = Producto::where('estado', false)->orderBy('tipoproducto_id', 'desc')->withCount('votoproductos')->withCount('dislikeproductos')->with(['tipoproducto', 'clasifproductos'])->get();
             //mostrar consulta en una respuesta
             //en formato json
             //armar array
@@ -79,7 +79,7 @@ class ProductoController extends Controller
             //withcount, poner nombre del metodo en el modelo con la relacion
             // $peli = Pelicula::orderBy('clasificacion_id', 'desc')->withCount('votopeliculas')->get();
 
-            $peli = Producto::where('id', $id)->orderBy('tipoproducto_id', 'desc')->withCount('votoproductoss')->with(['tipoproducto', 'clasifproductos'])->first();
+            $peli = Producto::where('id', $id)->orderBy('tipoproducto_id', 'desc')->withCount('votoproductos')->withCount('dislikeproductos')->with(['tipoproducto', 'clasifproductos'])->first();
             //mostrar consulta en una respuesta
             //en formato json
             //armar array
