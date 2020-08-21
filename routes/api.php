@@ -76,5 +76,7 @@ Route::group(['prefix' => 'v1'], function () {
         Route::get('ubicacion', 'UbicacionController@index');
         Route::get('', 'CarteleraController@index');
         Route::post('', 'CarteleraController@store');
+        Route::patch('/{id}', 'CarteleraController@update');
+        Route::get('/{id}', 'CarteleraController@filtroUbicacion');
     });
 });
