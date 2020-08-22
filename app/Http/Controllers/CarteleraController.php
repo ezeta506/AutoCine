@@ -69,7 +69,7 @@ class CarteleraController extends Controller
             //withcount, poner nombre del metodo en el modelo con la relacion
             // $peli = Pelicula::orderBy('clasificacion_id', 'desc')->withCount('votopeliculas')->get();
 
-            $carte = Cartelera::where('ubicacion_id', $id )->orderBy('id', 'desc')->with(['pelicula', 'ubicacion', 'tiquetes'])->get();
+            $carte = Cartelera::where('ubicacion_id', $id)->orderBy('id', 'desc')->with(['pelicula', 'ubicacion', 'tiquetes'])->get();
             //mostrar consulta en una respuesta
             //en formato json
             //armar array
@@ -130,7 +130,7 @@ class CarteleraController extends Controller
         // si ocupo en un array le puedo enviar más datos a la tabla intermedi. ver documentación
         if ($carte->save()) {
             $carte->tiquetes()->attach(
-                $request->input('tiquetes') === null ? [] : $request->input('tiquetes')
+                $request->input('tiquete_id') === null ? [] : $request->input('tiquete_id')
             );
             $response = 'Cartelera creada';
             return response()->json($response, 201);
@@ -200,7 +200,7 @@ class CarteleraController extends Controller
         // si ocupo en un array le puedo enviar más datos a la tabla intermedi. ver documentación
         if ($carte->update()) {
             $carte->tiquetes()->sync(
-                $request->input('tiquetes') === null ? [] : $request->input('tiquetes')
+                $request->input('tiquete_id') === null ? [] : $request->input('tiquete_id')
             );
             $response = 'Cartelera actualizada';
             return response()->json($response, 201);

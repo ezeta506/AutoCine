@@ -143,7 +143,7 @@ class ProductoController extends Controller
         // si ocupo en un array le puedo enviar más datos a la tabla intermedi. ver documentación
         if ($pro->save()) {
             $pro->clasifproductos()->attach(
-                $request->input('clasifproductos') === null ? [] : $request->input('clasifproductos')
+                $request->input('clasifproducto_id') === null ? [] : $request->input('clasifproducto_id')
             );
             $response = 'producto creado';
             return response()->json($response, 201);
@@ -217,7 +217,7 @@ class ProductoController extends Controller
         // si ocupo en un array le puedo enviar más datos a la tabla intermedi. ver documentación
         if ($pro->update()) {
             $pro->clasifproductos()->sync(
-                $request->input('clasifproductos') === null ? [] : $request->input('clasifproductos')
+                $request->input('clasifproducto_id') === null ? [] : $request->input('clasifproducto_id')
             );
             $response = 'producto actualizado';
             return response()->json($response, 201);

@@ -208,7 +208,7 @@ class PeliculaController extends Controller
 
         if ($peli->update()) {
             $peli->generos()->sync(
-                $request->input('generos') === null ? [] : $request->input('generos')
+                $request->input('genero_id') === null ? [] : $request->input('genero_id')
             );
             $response = 'pelicula actualizada';
             return response()->json($response, 200);
