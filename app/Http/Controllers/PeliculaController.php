@@ -142,7 +142,7 @@ class PeliculaController extends Controller
         // si ocupo en un array le puedo enviar más datos a la tabla intermedi. ver documentación
         if ($peli->save()) {
             $peli->generos()->attach(
-                $request->input('generos') === null ? [] : $request->input('generos')
+                $request->input('genero_id') === null ? [] : $request->input('genero_id')
             );
             $response = 'pelicula creada';
             return response()->json($response, 201);
