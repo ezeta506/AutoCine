@@ -105,6 +105,7 @@ class CarteleraController extends Controller
             $this->validate($request, [
                 //no dejar espacios
                 'fechaHora' => 'required|date',
+                'hora' => 'required',
                 'pelicula_id' => 'required',
                 'ubicacion_id' => 'required',
                 'estado' => 'required'
@@ -120,6 +121,7 @@ class CarteleraController extends Controller
         //tambien se puede poner el nombre del campo sin el input
         $carte = new Cartelera();
         $carte->fechaHora = $request->input('fechaHora');
+        $carte->hora = $request->input('hora');
         $carte->pelicula_id = $request->input('pelicula_id');
         $carte->ubicacion_id = $request->input('ubicacion_id');
         $carte->estado = $request->input('estado');
@@ -175,6 +177,7 @@ class CarteleraController extends Controller
             $this->validate($request, [
                 //no dejar espacios
                 'fechaHora' => 'required|date',
+                'hora' => 'required',
                 'pelicula_id' => 'required',
                 'ubicacion_id' => 'required',
                 'estado' => 'required'
@@ -190,6 +193,7 @@ class CarteleraController extends Controller
         //tambien se puede poner el nombre del campo sin el input
         $carte = Cartelera::find($id);
         $carte->fechaHora = $request->input('fechaHora');
+        $carte->hora = $request->input('hora');
         $carte->pelicula_id = $request->input('pelicula_id');
         $carte->ubicacion_id = $request->input('ubicacion_id');
         $carte->estado = $request->input('estado');

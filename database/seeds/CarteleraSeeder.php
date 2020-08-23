@@ -15,6 +15,7 @@ class CarteleraSeeder extends Seeder
 
         $cartelera = new \App\Cartelera();
         $cartelera->fechaHora = '2020-08-29';
+        $cartelera->hora = '10:00:00';
         $cartelera->pelicula_id = 1;
         $cartelera->ubicacion_id = 1;
         $cartelera->estado = true;
@@ -23,6 +24,7 @@ class CarteleraSeeder extends Seeder
 
         $cartelera = new \App\Cartelera();
         $cartelera->fechaHora = '2020-08-29';
+        $cartelera->hora = '10:00:00';
         $cartelera->pelicula_id = 2;
         $cartelera->ubicacion_id = 1;
         $cartelera->estado = true;
@@ -31,6 +33,7 @@ class CarteleraSeeder extends Seeder
 
         $cartelera = new \App\Cartelera();
         $cartelera->fechaHora = '2020-08-29';
+        $cartelera->hora = '10:00:00';
         $cartelera->pelicula_id = 3;
         $cartelera->ubicacion_id = 2;
         $cartelera->estado = true;
@@ -39,6 +42,7 @@ class CarteleraSeeder extends Seeder
 
         $cartelera = new \App\Cartelera();
         $cartelera->fechaHora = '2020-08-29';
+        $cartelera->hora = '10:00:00';
         $cartelera->pelicula_id = 4;
         $cartelera->ubicacion_id = 2;
         $cartelera->estado = true;
