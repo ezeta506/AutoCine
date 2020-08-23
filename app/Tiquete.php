@@ -12,4 +12,9 @@ class Tiquete extends Model
     {
         return $this->belongsToMany('App\Cartelera');
     }
+
+    public function encabezados()
+    {
+        return $this->belongsToMany('App\Encabezado');
+    }
 }

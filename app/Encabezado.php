@@ -12,9 +12,14 @@ class Encabezado extends Model
         return $this->belongsTo('App\User');
     }
 
-    public function carteleras()
+    public function cartelera()
     {
-        return $this->belongsToMany('App\Cartelera');
+        return $this->belongsTo('App\Cartelera');
+    }
+
+    public function tiquetes()
+    {
+        return $this->belongsToMany('App\Tiquete');
     }
 
     public function productos()

@@ -17,12 +17,14 @@ class CreateEncabezadosTable extends Migration
             $table->increments('id');
             $table->date('fechaHoraVenta');
             $table->unsignedInteger('user_id');
+            $table->unsignedInteger('cartelera_id');
             //cantidad de digitos, cantidad de decimales
             $table->decimal('impuesto', 8, 2);
             $table->decimal('total', 8, 2);
             $table->boolean('estado');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('cartelera_id')->references('id')->on('carteleras');
         });
     }
 
@@ -36,6 +38,7 @@ class CreateEncabezadosTable extends Migration
         Schema::table('encabezados', function (Blueprint $table) {
 
             $table->dropForeign('encabezados_user_id_foreign');
+            $table->dropForeign('encabezados_cartelera_id_foreign');
         });
 
 
