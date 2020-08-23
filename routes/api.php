@@ -29,9 +29,15 @@ Route::group(['prefix' => 'v1'], function () {
         });
 
         Route::group([
-            'prefix' => 'dis'
+            'prefix' => 'dislike'
         ], function ($router) {
-            Route::post('/{id}', 'DislikepeliculaController@store');
+            Route::get('/{id}', 'DislikepeliculaController@store');
+        });
+
+        Route::group([
+            'prefix' => 'like'
+        ], function ($router) {
+            Route::get('/{id}', 'VotopeliculaController@store');
         });
         //primer parametro el nombre por el que nos referimos a la ruta
         //segundo el controlador y la accion que va a llamar
@@ -40,8 +46,6 @@ Route::group(['prefix' => 'v1'], function () {
         Route::get('clasificacion', 'ClasificacionController@index');
         Route::get('genero', 'GeneroController@index');
         Route::post('', 'PeliculaController@store');
-        Route::post('/{id}', 'VotopeliculaController@store');
-        Route::post('/{id}', 'DislikepeliculaController@store');
         Route::patch('/{id}', 'PeliculaController@update');
         Route::get('/{id}', 'PeliculaController@filtroNombre');
     });
@@ -60,9 +64,14 @@ Route::group(['prefix' => 'v1'], function () {
         });
         //Rutas roles
         Route::group([
-            'prefix' => 'dis'
+            'prefix' => 'dislike'
         ], function ($router) {
-            Route::post('/{id}', 'DislikeproductoController@store');
+            Route::get('/{id}', 'DislikeproductoController@store');
+        });
+        Route::group([
+            'prefix' => 'like'
+        ], function ($router) {
+            Route::get('/{id}', 'VotoproductoController@store');
         });
         //primer parametro el nombre por el que nos referimos a la ruta
         //segundo el controlador y la accion que va a llamar
@@ -71,8 +80,6 @@ Route::group(['prefix' => 'v1'], function () {
         Route::get('tipoproducto', 'TipoproductoController@index');
         Route::get('clasifproducto', 'ClasifproductoController@index');
         Route::post('', 'ProductoController@store');
-        Route::post('/{id}', 'VotoproductoController@store');
-
         Route::patch('/{id}', 'ProductoController@update');
         Route::get('/{id}', 'ProductoController@filtroId');
     });
@@ -103,6 +110,5 @@ Route::group(['prefix' => 'v1'], function () {
         //segundo el controlador y la accion que va a llamar
 
         Route::post('', 'EncabezadoController@store');
-
     });
 });
