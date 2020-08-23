@@ -22,7 +22,7 @@ class CarteleraController extends Controller
             //withcount, poner nombre del metodo en el modelo con la relacion
             // $peli = Pelicula::orderBy('clasificacion_id', 'desc')->withCount('votopeliculas')->get();
 
-            $carte = Cartelera::where('estado', true)->with(['pelicula', 'ubicacion', 'tiquetes'])->get();
+            $carte = Cartelera::where('estado', true)->where('fechaHora', '>=', date('Y-m-d'))->where('hora', '>', date('H:i:s'))->with(['pelicula', 'ubicacion', 'tiquetes'])->get();
             //mostrar consulta en una respuesta
             //en formato json
             //armar array
@@ -45,7 +45,7 @@ class CarteleraController extends Controller
             //withcount, poner nombre del metodo en el modelo con la relacion
             // $peli = Pelicula::orderBy('clasificacion_id', 'desc')->withCount('votopeliculas')->get();
 
-            $carte = Cartelera::where('estado', false)->get();
+            $carte = Cartelera::where('estado', false)->where('fechaHora', '<=', date('Y-m-d'))->where('hora', '<', date('H:i:s'))->with(['pelicula', 'ubicacion', 'tiquetes'])->get();
             //mostrar consulta en una respuesta
             //en formato json
             //armar array

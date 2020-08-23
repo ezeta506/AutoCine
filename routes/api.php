@@ -94,3 +94,14 @@ Route::group(['prefix' => 'v1'], function () {
         Route::get('id/{id}', 'CarteleraController@filtroId');
     });
 });
+
+Route::group(['prefix' => 'v1'], function () {
+    Route::group(['prefix' => 'encabezados'], function () {
+
+        //primer parametro el nombre por el que nos referimos a la ruta
+        //segundo el controlador y la accion que va a llamar
+
+        Route::post('', 'EncabezadoController@store');
+
+    });
+});

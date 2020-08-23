@@ -65,10 +65,8 @@ class EncabezadoController extends Controller
         //el atach toma el id de peli y el de generos y los guarda en la tabla intermedia
         // si ocupo en un array le puedo enviar más datos a la tabla intermedi. ver documentación
         if ($encabezado->save()) {
-            $encabezado->generos()->attach(
-                $request->input('genero_id') === null ? [] : $request->input('genero_id')
-            );
-            $response = 'pelicula creada';
+            $encabezado->carteleras()->attach( $request->input('cartelera_id') === null ? [] : $request->input('cartelera_id'), [$request->input('cantidad')]);
+            $response = 'Factura creada';
             return response()->json($response, 201);
         } else {
             $response = ['msg' => 'error durante la creacion'];
