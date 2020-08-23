@@ -91,5 +91,6 @@ Route::group(['prefix' => 'v1'], function () {
         Route::post('', 'CarteleraController@store');
         Route::patch('/{id}', 'CarteleraController@update');
         Route::get('/{id}', 'CarteleraController@filtroUbicacion');
+        Route::get('id/{id}', 'CarteleraController@filtroId');
     });
 });

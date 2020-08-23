@@ -53,19 +53,19 @@ class EncabezadoController extends Controller
         }
         //instancia de pelicula
         //tambien se puede poner el nombre del campo sin el input
-        $peli = new Pelicula();
-        $peli->name = $request->input('name');
-        $peli->sinopsis = $request->input('sinopsis');
-        $peli->imagen = $request->input('imagen');
-        $peli->clasificacion_id = $request->input('clasificacion_id');
-        $peli->estado = $request->input('estado');
+        $encabezado = new Encabezado();
+        $encabezado->fechaHoraVenta = $request->input('fechaHoraVenta');
+        $encabezado->user_id = $request->input('user_id');
+        $encabezado->impuesto = $request->input('impuesto');
+        $encabezado->total = $request->input('total');
+        $encabezado->estado = $request->input('estado');
         //tres iguales es para comparar que tenga el valor y el tipo
         // los request son las entradas
         //si no hay generos le asigna uno vacio, si hay le asigno el que viene
         //el atach toma el id de peli y el de generos y los guarda en la tabla intermedia
         // si ocupo en un array le puedo enviar más datos a la tabla intermedi. ver documentación
-        if ($peli->save()) {
-            $peli->generos()->attach(
+        if ($encabezado->save()) {
+            $encabezado->generos()->attach(
                 $request->input('genero_id') === null ? [] : $request->input('genero_id')
             );
             $response = 'pelicula creada';
