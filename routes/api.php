@@ -87,6 +87,7 @@ Route::group(['prefix' => 'v1'], function () {
         //segundo el controlador y la accion que va a llamar
         Route::get('ubicacion', 'UbicacionController@index');
         Route::get('tiquete', 'TiqueteController@index');
+        Route::get('Deshabilitado', 'CarteleraController@getCarteleraDeshabilitado');
         Route::get('', 'CarteleraController@index');
         Route::post('', 'CarteleraController@store');
         Route::patch('/{id}', 'CarteleraController@update');

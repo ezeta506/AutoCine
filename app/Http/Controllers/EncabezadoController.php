@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Encabezado;
 use Illuminate\Http\Request;
+use JWTAuth;
 
 class EncabezadoController extends Controller
 {
@@ -65,7 +66,7 @@ class EncabezadoController extends Controller
         //el atach toma el id de peli y el de generos y los guarda en la tabla intermedia
         // si ocupo en un array le puedo enviar más datos a la tabla intermedi. ver documentación
         if ($encabezado->save()) {
-            $encabezado->carteleras()->attach( $request->input('cartelera_id') === null ? [] : $request->input('cartelera_id'), [$request->input('cantidad')]);
+            $encabezado->carteleras()->attach( $request->input('carteleras') === null ? [] : $request->input('carteleras'));
             $response = 'Factura creada';
             return response()->json($response, 201);
         } else {
