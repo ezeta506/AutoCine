@@ -15,6 +15,6 @@ class Tiquete extends Model
 
     public function encabezados()
     {
-        return $this->belongsToMany('App\Encabezado');
+        return $this->belongsToMany('App\Encabezado')->withPivot(['cantidad']);
     }
 }

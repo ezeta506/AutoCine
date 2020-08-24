@@ -19,7 +19,7 @@ class Encabezado extends Model
 
     public function tiquetes()
     {
-        return $this->belongsToMany('App\Tiquete');
+        return $this->belongsToMany('App\Tiquete')->withPivot(['cantidad']);
     }
 
     public function productos()

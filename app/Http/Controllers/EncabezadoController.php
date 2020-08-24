@@ -40,10 +40,12 @@ class EncabezadoController extends Controller
             $this->validate($request, [
                 //no dejar espacios
                 'fechaHoraVenta' => 'required|date',
-                'user_id' => 'required',
+                // 'user_id' => 'required',
+                'cartelera_id' => 'required',
                 'impuesto' => 'required',
                 'total' => 'required',
-                'estado' => 'required'
+                'estado' => 'required',
+
             ]);
             if (!$user = JWTAuth::parseToken()->authenticate()) {
                 return response()->json(['msg' => 'Usuario no encontrado'], 404);
@@ -54,9 +56,14 @@ class EncabezadoController extends Controller
         }
         //instancia de pelicula
         //tambien se puede poner el nombre del campo sin el input
+        $cantidad = $request->input('cantidad');
+
         $encabezado = new Encabezado();
         $encabezado->fechaHoraVenta = $request->input('fechaHoraVenta');
-        $encabezado->user_id = $request->input('user_id');
+        // $encabezado->user_id = $request->input('user_id');
+        $encabezado->user()->associate($user->id);
+        // $encabezado->cartelera_id = $request->input($idCarte);
+        $encabezado->cartelera_id = $request->input('cartelera_id');
         $encabezado->impuesto = $request->input('impuesto');
         $encabezado->total = $request->input('total');
         $encabezado->estado = $request->input('estado');
@@ -65,8 +72,9 @@ class EncabezadoController extends Controller
         //si no hay generos le asigna uno vacio, si hay le asigno el que viene
         //el atach toma el id de peli y el de generos y los guarda en la tabla intermedia
         // si ocupo en un array le puedo enviar más datos a la tabla intermedi. ver documentación
+
         if ($encabezado->save()) {
-            $encabezado->carteleras()->attach( $request->input('carteleras') === null ? [] : $request->input('carteleras'), ['cantidad']);
+            $encabezado->tiquetes()->attach([$request->input('tiquetes'), ['cantidad' => $cantidad]]);
             $response = 'Factura creada';
             return response()->json($response, 201);
         } else {
