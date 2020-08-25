@@ -56,7 +56,7 @@ class EncabezadoController extends Controller
         }
         //instancia de pelicula
         //tambien se puede poner el nombre del campo sin el input
-        $cantidad = $request->input('cantidad');
+
 
         $encabezado = new Encabezado();
         $encabezado->fechaHoraVenta = $request->input('fechaHoraVenta');
@@ -73,8 +73,20 @@ class EncabezadoController extends Controller
         //el atach toma el id de peli y el de generos y los guarda en la tabla intermedia
         // si ocupo en un array le puedo enviar más datos a la tabla intermedi. ver documentación
 
+        $tique = $request->input('tiquete_id', []);
+        $cantidad = $request->input('cantidad', []);
+
         if ($encabezado->save()) {
-            $encabezado->tiquetes()->attach([$request->input('tiquetes'), ['cantidad' => $cantidad]]);
+
+            for ($tiquet = 0; $tiquet < count(tiquetes()); $tiquet++) {
+                if ($tique[$tiquet] != '') {
+                    $encabezado->tiquetes()->attach($tique[$tiquet], ['cantidad' => $cantidad[$tiquet]]);
+                }
+            }
+            //  if ($products[$product] != '') {
+            //   $order->products()->attach($products[$product], ['quantity' => $quantities[$product]]);
+            // }
+
             $response = 'Factura creada';
             return response()->json($response, 201);
         } else {
