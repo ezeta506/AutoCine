@@ -73,19 +73,29 @@ class EncabezadoController extends Controller
         //el atach toma el id de peli y el de generos y los guarda en la tabla intermedia
         // si ocupo en un array le puedo enviar más datos a la tabla intermedi. ver documentación
 
+        //manejo de tiquetes
         $tique = $request->input('tiquete_id', []);
         $cantidad = $request->input('cantidad', []);
 
+
+        //manejo de productos
+        $producto = $request->input('producto_id', []);
+        $cantidadp = $request->input('cantidadp', []);
+
         if ($encabezado->save()) {
 
-            for ($tiquet = 0; $tiquet < count(tiquetes()); $tiquet++) {
+            for ($tiquet = 0; $tiquet < count($tique); $tiquet++) {
                 if ($tique[$tiquet] != '') {
                     $encabezado->tiquetes()->attach($tique[$tiquet], ['cantidad' => $cantidad[$tiquet]]);
                 }
             }
-            //  if ($products[$product] != '') {
-            //   $order->products()->attach($products[$product], ['quantity' => $quantities[$product]]);
-            // }
+
+            for ($pro = 0; $pro < count($producto); $pro++) {
+                if ($producto[$pro] != '') {
+                    $encabezado->productos()->attach($producto[$pro], ['cantidad' => $cantidadp[$pro]]);
+                }
+            }
+
 
             $response = 'Factura creada';
             return response()->json($response, 201);

@@ -25,7 +25,7 @@ class Producto extends Model
 
     public function encabezados()
     {
-        return $this->belongsToMany('App\Encabezado');
+        return $this->belongsToMany('App\Encabezado')->withPivot(['cantidadp']);
     }
 
     public function votoproductos()

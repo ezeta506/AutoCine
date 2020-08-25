@@ -24,6 +24,6 @@ class Encabezado extends Model
 
     public function productos()
     {
-        return $this->belongsToMany('App\Producto');
+        return $this->belongsToMany('App\Producto')->withPivot(['cantidadp']);
     }
 }
