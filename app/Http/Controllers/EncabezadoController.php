@@ -92,7 +92,7 @@ class EncabezadoController extends Controller
 
             for ($pro = 0; $pro < count($producto); $pro++) {
                 if ($producto[$pro] != '') {
-                    $encabezado->productos()->attach($producto[$pro], ['cantidad' => $cantidadp[$pro]]);
+                    $encabezado->productos()->attach($producto[$pro], ['cantidadp' => $cantidadp[$pro]]);
                 }
             }
 
