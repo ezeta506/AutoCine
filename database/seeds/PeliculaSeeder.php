@@ -46,5 +46,14 @@ class PeliculaSeeder extends Seeder
         $pelicula->estado = false;
         $pelicula->save();
         $pelicula->generos()->attach([1,2]);
+
+        $pelicula = new \App\Pelicula();
+        $pelicula->name = "La momia";
+        $pelicula->sinopsis = "Es una pelicula Manga que cuenta la historia de un joven ninja hiperactivo llamado Naruto Uzumaki que hará todo lo posible por ascender al máximo grado ninja de su aldea con el propósito de ser reconocido como alguien importante dentro de su aldea";
+        $pelicula->imagen = "./assets/img_productos/naruto.jpg";
+        $pelicula->clasificacion_id = 2;
+        $pelicula->estado = false;
+        $pelicula->save();
+        $pelicula->generos()->attach([1, 2]);
     }
 }

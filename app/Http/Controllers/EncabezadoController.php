@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Encabezado;
+use App\Cartelera;
 use Illuminate\Http\Request;
 use JWTAuth;
 
@@ -16,6 +17,38 @@ class EncabezadoController extends Controller
     public function index()
     {
         //
+    }
+
+
+    public function getEspaciosDisponibles($id)
+    {
+        try {
+
+
+           // $carte = Cartelera::find($id);
+
+            $carte = Cartelera::with('ubicacion')->find($id);
+
+
+         //   $carte =   Cartelera::table('users')
+            //->join('contacts', 'users.id', '=', 'contacts.user_id')
+          //  ->join('orders', 'users.id', '=', 'orders.user_id')
+           // ->select('users.id', 'contacts.phone', 'orders.price')
+          //  ->get();
+
+            //$espacios= $carte->
+
+            //mostrar consulta en una respuesta
+            //en formato json
+            //armar array
+            $response = $carte;
+
+            //response autocompletado
+            // 200 es ok
+            return response()->json($response, 200);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage(), 422);
+        }
     }
 
     /**

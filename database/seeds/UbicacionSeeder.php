@@ -24,5 +24,19 @@ class UbicacionSeeder extends Seeder
         $ubicacion->capacidadMoto = 60;
         $ubicacion->estado = true;
         $ubicacion->save();
+
+        $ubicacion = new \App\Ubicacion();
+        $ubicacion->name = "Manuel Antonio";
+        $ubicacion->capacidadCarro = 150;
+        $ubicacion->capacidadMoto = 60;
+        $ubicacion->estado = true;
+        $ubicacion->save();
+
+        $ubicacion = new \App\Ubicacion();
+        $ubicacion->name = "Puerto Viejo";
+        $ubicacion->capacidadCarro = 150;
+        $ubicacion->capacidadMoto = 60;
+        $ubicacion->estado = true;
+        $ubicacion->save();
     }
 }

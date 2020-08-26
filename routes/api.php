@@ -16,6 +16,18 @@ use Illuminate\Support\Facades\Route;
 */
 
 
+Route::group(['prefix' => 'v1'], function () {
+    Route::group(['prefix' => 'user'], function () {
+    Route::group(['prefix' => 'auth'], function ($router) {
+        Route::post('register', 'AuthController@register');
+        Route::post('login', 'AuthController@login');
+        Route::post('logout', 'AuthController@logout');
+        Route::post('refresh', 'AuthController@refresh');
+        Route::post('me', 'AuthController@me');
+    });
+    });
+});
+
 
 //prefix es la palabra que se agrega a la url
 Route::group(['prefix' => 'v1'], function () {
@@ -50,6 +62,7 @@ Route::group(['prefix' => 'v1'], function () {
         Route::get('/{id}', 'PeliculaController@filtroNombre');
     });
 });
+
 
 
 
@@ -110,5 +123,6 @@ Route::group(['prefix' => 'v1'], function () {
         //segundo el controlador y la accion que va a llamar
 
         Route::post('', 'EncabezadoController@store');
+        Route::get('/{id}', 'EncabezadoController@getEspaciosDisponibles');
     });
 });
