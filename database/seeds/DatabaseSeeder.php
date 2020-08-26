@@ -20,6 +20,11 @@ class DatabaseSeeder extends Seeder
         $this->call(UbicacionSeeder::class);
         $this->call(ProductoSeeder::class);
         $this->call(PeliculaSeeder::class);
-
+        $this->call(VotopeliculaSeeder::class);
+        $this->call(VotoproductoSeeder::class);
+        $this->call(DislikepeliculaSeeder::class);
+        $this->call(DislikeproductoSeeder::class);
+        $this->call(TiqueteSeeder::class);
+        $this->call(CarteleraSeeder::class);
     }
 }
