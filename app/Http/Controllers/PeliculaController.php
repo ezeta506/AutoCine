@@ -31,7 +31,31 @@ class PeliculaController extends Controller
             //withcount, poner nombre del metodo en el modelo con la relacion
             // $peli = Pelicula::orderBy('clasificacion_id', 'desc')->withCount('votopeliculas')->get();
 
-            $peli = Pelicula::where('estado', true)->orderBy('clasificacion_id', 'desc')->withCount('votopeliculas')->get();
+            $peli = Pelicula::where('estado', true)->orderBy('clasificacion_id', 'desc')->withCount('votopeliculas')->withCount('dislikepeliculas')->with(['clasificacion', 'generos'])->get();
+            //mostrar consulta en una respuesta
+            //en formato json
+            //armar array
+            $response = $peli;
+
+            //response autocompletado
+            // 200 es ok
+            return response()->json($response, 200);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage(), 422);
+        }
+    }
+
+    public function peliculaDeshabilitada()
+    {
+
+        try {
+            //traer todas las columnas, no tengo que dar formato
+            // $peli=Pelicula::all();
+
+            //withcount, poner nombre del metodo en el modelo con la relacion
+            // $peli = Pelicula::orderBy('clasificacion_id', 'desc')->withCount('votopeliculas')->get();
+
+            $peli = Pelicula::where('estado', false)->orderBy('clasificacion_id', 'desc')->withCount('votopeliculas')->withCount('dislikepeliculas')->with(['clasificacion', 'generos'])->get();
             //mostrar consulta en una respuesta
             //en formato json
             //armar array
@@ -55,7 +79,7 @@ class PeliculaController extends Controller
             //withcount, poner nombre del metodo en el modelo con la relacion
             // $peli = Pelicula::orderBy('clasificacion_id', 'desc')->withCount('votopeliculas')->get();
 
-            $peli = Pelicula::where('id', $id)->orderBy('clasificacion_id', 'desc')->withCount('votopeliculas')->with(['clasificacion'])->first();
+            $peli = Pelicula::where('id', $id)->orderBy('clasificacion_id', 'desc')->withCount('votopeliculas')->withCount('dislikepeliculas')->with(['clasificacion', 'generos'])->first();
             //mostrar consulta en una respuesta
             //en formato json
             //armar array
@@ -118,7 +142,7 @@ class PeliculaController extends Controller
         // si ocupo en un array le puedo enviar más datos a la tabla intermedi. ver documentación
         if ($peli->save()) {
             $peli->generos()->attach(
-                $request->input('generos') === null ? [] : $request->input('generos')
+                $request->input('genero_id') === null ? [] : $request->input('genero_id')
             );
             $response = 'pelicula creada';
             return response()->json($response, 201);
@@ -162,7 +186,7 @@ class PeliculaController extends Controller
         try {
             $this->validate($request, [
                 //no dejar espacios
-                'name' => 'required|min:20',
+                'name' => 'required|min:2',
                 'sinopsis' => 'required|min:20',
                 'imagen' => 'required',
                 'clasificacion_id' => 'required',
@@ -184,7 +208,7 @@ class PeliculaController extends Controller
 
         if ($peli->update()) {
             $peli->generos()->sync(
-                $request->input('generos') === null ? [] : $request->input('generos')
+                $request->input('genero_id') === null ? [] : $request->input('genero_id')
             );
             $response = 'pelicula actualizada';
             return response()->json($response, 200);

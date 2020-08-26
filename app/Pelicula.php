@@ -29,6 +29,11 @@ class Pelicula extends Model
         return $this->hasMany('App\Votopelicula');
     }
 
+    public function dislikepeliculas()
+    {
+        return $this->hasMany('App\Dislikepelicula');
+    }
+
     public function carteleras()
     {
         return $this->hasMany('App\Cartelera');

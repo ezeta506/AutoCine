@@ -17,7 +17,7 @@ class EncabezadoProducto extends Migration
             $table->increments('id');
             $table->unsignedInteger('encabezado_id');
             $table->unsignedInteger('producto_id');
-            $table->integer('cantidad');
+            $table->integer('cantidadp');
             $table->foreign('encabezado_id')->references('id')->on('encabezados');
             $table->foreign('producto_id')->references('id')->on('productos');
         });

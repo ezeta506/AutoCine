@@ -18,6 +18,7 @@ class PeliculaSeeder extends Seeder
         $pelicula->clasificacion_id = 1;
         $pelicula->estado = true;
         $pelicula->save();
+        $pelicula->generos()->attach([1, 4]);
 
         $pelicula = new \App\Pelicula();
         $pelicula->name = "La monja";
@@ -26,6 +27,7 @@ class PeliculaSeeder extends Seeder
         $pelicula->clasificacion_id = 2;
         $pelicula->estado = true;
         $pelicula->save();
+        $pelicula->generos()->attach([2, 4]);
 
         $pelicula = new \App\Pelicula();
         $pelicula->name = "The Notebook";
@@ -34,5 +36,24 @@ class PeliculaSeeder extends Seeder
         $pelicula->clasificacion_id = 1;
         $pelicula->estado = true;
         $pelicula->save();
+        $pelicula->generos()->attach([4, 5]);
+
+        $pelicula = new \App\Pelicula();
+        $pelicula->name = "La momia";
+        $pelicula->sinopsis = "Las leyendas se hacen realidad en Egipto";
+        $pelicula->imagen = "./assets/img_productos/momia.jpg";
+        $pelicula->clasificacion_id = 2;
+        $pelicula->estado = false;
+        $pelicula->save();
+        $pelicula->generos()->attach([1,2]);
+
+        $pelicula = new \App\Pelicula();
+        $pelicula->name = "La momia";
+        $pelicula->sinopsis = "Es una pelicula Manga que cuenta la historia de un joven ninja hiperactivo llamado Naruto Uzumaki que hará todo lo posible por ascender al máximo grado ninja de su aldea con el propósito de ser reconocido como alguien importante dentro de su aldea";
+        $pelicula->imagen = "./assets/img_productos/naruto.jpg";
+        $pelicula->clasificacion_id = 2;
+        $pelicula->estado = false;
+        $pelicula->save();
+        $pelicula->generos()->attach([1, 2]);
     }
 }

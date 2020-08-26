@@ -19,6 +19,7 @@ class ProductoSeeder extends Seeder
         $producto->precio = 1000;
         $producto->estado = true;
         $producto->save();
+        $producto->clasifproductos()->attach([1, 2,3]);
 
         $producto = new \App\Producto();
         $producto->name = "Choco Banano";
@@ -28,6 +29,7 @@ class ProductoSeeder extends Seeder
         $producto->precio = 1200;
         $producto->estado = true;
         $producto->save();
+        $producto->clasifproductos()->attach([1]);
 
         $producto = new \App\Producto();
         $producto->name = "Palomitas";
@@ -37,6 +39,7 @@ class ProductoSeeder extends Seeder
         $producto->precio = 2500;
         $producto->estado = true;
         $producto->save();
+        $producto->clasifproductos()->attach([1, 2, 3]);
 
         $producto = new \App\Producto();
         $producto->name = "Tacos";
@@ -46,6 +49,7 @@ class ProductoSeeder extends Seeder
         $producto->precio = 2400;
         $producto->estado = true;
         $producto->save();
+        $producto->clasifproductos()->attach([1, 2, 3]);
 
         $producto = new \App\Producto();
         $producto->name = "Hamburguesa";
@@ -55,6 +59,7 @@ class ProductoSeeder extends Seeder
         $producto->precio = 3100;
         $producto->estado = true;
         $producto->save();
+        $producto->clasifproductos()->attach([1, 2, 3]);
 
         $producto = new \App\Producto();
         $producto->name = "Hot Dog";
@@ -64,6 +69,7 @@ class ProductoSeeder extends Seeder
         $producto->precio = 1200;
         $producto->estado = true;
         $producto->save();
+        $producto->clasifproductos()->attach([1, 2, 3]);
 
         $producto = new \App\Producto();
         $producto->name = "Paleta";
@@ -73,6 +79,7 @@ class ProductoSeeder extends Seeder
         $producto->precio = 450;
         $producto->estado = true;
         $producto->save();
+        $producto->clasifproductos()->attach([1]);
 
         $producto = new \App\Producto();
         $producto->name = "Apretados";
@@ -91,5 +98,6 @@ class ProductoSeeder extends Seeder
         $producto->precio = 550;
         $producto->estado = true;
         $producto->save();
+        $producto->clasifproductos()->attach([1, 2, 3]);
     }
 }

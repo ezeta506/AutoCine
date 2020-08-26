@@ -31,7 +31,31 @@ class ProductoController extends Controller
             //withcount, poner nombre del metodo en el modelo con la relacion
             // $peli = Pelicula::orderBy('clasificacion_id', 'desc')->withCount('votopeliculas')->get();
 
-            $peli = Producto::where('estado', true)->orderBy('tipoproducto_id', 'desc')->withCount('votoproductoss')->get();
+            $peli = Producto::where('estado', true)->orderBy('tipoproducto_id', 'desc')->withCount('votoproductos')->withCount('dislikeproductos')->with(['tipoproducto', 'clasifproductos'])->get();
+            //mostrar consulta en una respuesta
+            //en formato json
+            //armar array
+            $response = $peli;
+
+            //response autocompletado
+            // 200 es ok
+            return response()->json($response, 200);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage(), 422);
+        }
+    }
+
+    public function productoDeshabilitado()
+    {
+
+        try {
+            //traer todas las columnas, no tengo que dar formato
+            // $peli=Pelicula::all();
+
+            //withcount, poner nombre del metodo en el modelo con la relacion
+            // $peli = Pelicula::orderBy('clasificacion_id', 'desc')->withCount('votopeliculas')->get();
+
+            $peli = Producto::where('estado', false)->orderBy('tipoproducto_id', 'desc')->withCount('votoproductos')->withCount('dislikeproductos')->with(['tipoproducto', 'clasifproductos'])->get();
             //mostrar consulta en una respuesta
             //en formato json
             //armar array
@@ -55,7 +79,7 @@ class ProductoController extends Controller
             //withcount, poner nombre del metodo en el modelo con la relacion
             // $peli = Pelicula::orderBy('clasificacion_id', 'desc')->withCount('votopeliculas')->get();
 
-            $peli = Producto::where('id', $id)->orderBy('tipoproducto_id', 'desc')->withCount('votoproductoss')->with(['tipoproducto', 'clasifproductos'])->first();
+            $peli = Producto::where('id', $id)->orderBy('tipoproducto_id', 'desc')->withCount('votoproductos')->withCount('dislikeproductos')->with(['tipoproducto', 'clasifproductos'])->first();
             //mostrar consulta en una respuesta
             //en formato json
             //armar array
@@ -119,7 +143,7 @@ class ProductoController extends Controller
         // si ocupo en un array le puedo enviar más datos a la tabla intermedi. ver documentación
         if ($pro->save()) {
             $pro->clasifproductos()->attach(
-                $request->input('clasifproductos') === null ? [] : $request->input('clasifproductos')
+                $request->input('clasifproducto_id') === null ? [] : $request->input('clasifproducto_id')
             );
             $response = 'producto creado';
             return response()->json($response, 201);
@@ -158,9 +182,49 @@ class ProductoController extends Controller
      * @param  \App\Producto  $producto
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Producto $producto)
+    public function update(Request $request,  $id)
     {
-        //
+        try {
+            $this->validate($request, [
+                //no dejar espacios
+                'name' => 'required|min:3',
+                'descripcion' => 'required|min:20',
+                'imagen' => 'required',
+                'tipoproducto_id' => 'required',
+                'precio' => 'required',
+                'estado' => 'required'
+            ]);
+            if (!$user = JWTAuth::parseToken()->authenticate()) {
+                return response()->json(['msg' => 'Usuario no encontrado'], 404);
+            }
+        } catch (\Illuminate\Validation\ValidationException $e) {
+
+            return $this->responseErrors($e->errors(), 422);
+        }
+        //instancia de pelicula
+        //tambien se puede poner el nombre del campo sin el input
+        $pro = Producto::find($id);
+        $pro->name = $request->input('name');
+        $pro->descripcion = $request->input('descripcion');
+        $pro->imagen = $request->input('imagen');
+        $pro->tipoproducto_id = $request->input('tipoproducto_id');
+        $pro->precio = $request->input('precio');
+        $pro->estado = $request->input('estado');
+        //tres iguales es para comparar que tenga el valor y el tipo
+        // los request son las entradas
+        //si no hay generos le asigna uno vacio, si hay le asigno el que viene
+        //el atach toma el id de peli y el de generos y los guarda en la tabla intermedia
+        // si ocupo en un array le puedo enviar más datos a la tabla intermedi. ver documentación
+        if ($pro->update()) {
+            $pro->clasifproductos()->sync(
+                $request->input('clasifproducto_id') === null ? [] : $request->input('clasifproducto_id')
+            );
+            $response = 'producto actualizado';
+            return response()->json($response, 201);
+        } else {
+            $response = ['msg' => 'error durante la actualización'];
+            return response()->json($response, 404);
+        }
     }
 
     /**

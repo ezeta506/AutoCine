@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CarteleraEncabezado extends Migration
+class EncabezadoTiquete extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CarteleraEncabezado extends Migration
      */
     public function up()
     {
-        Schema::create('cartelera_encabezado', function (Blueprint $table) {
+        Schema::create('encabezado_tiquete', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('cartelera_id');
+            $table->unsignedInteger('tiquete_id');
             $table->unsignedInteger('encabezado_id');
             $table->integer('cantidad');
-            $table->foreign('cartelera_id')->references('id')->on('carteleras');
+            $table->foreign('tiquete_id')->references('id')->on('tiquetes');
             $table->foreign('encabezado_id')->references('id')->on('encabezados');
         });
     }
@@ -30,12 +30,12 @@ class CarteleraEncabezado extends Migration
      */
     public function down()
     {
-        Schema::table('cartelera_encabezado', function (Blueprint $table) {
+        Schema::table('encabezado_tiquete', function (Blueprint $table) {
 
-            $table->dropForeign('cartelera_encabezado_cartelera_id_foreign');
-            $table->dropForeign('cartelera_encabezado_encabezado_id_foreign');
+            $table->dropForeign('encabezado_tiquete_tiquete_id_foreign');
+            $table->dropForeign('encabezado_tiquete_encabezado_id_foreign');
         });
 
-        Schema::dropIfExists('cartelera_encabezado');
+        Schema::dropIfExists('encabezado_tiquete');
     }
 }

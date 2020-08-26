@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Dislikeproducto;
 use App\Producto;
-use App\Votoproducto;
 use Illuminate\Http\Request;
 
-class VotoproductoController extends Controller
+class DislikeproductoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -36,9 +36,9 @@ class VotoproductoController extends Controller
      */
     public function store($id)
     {
-        $pro = Producto::with('votoproductos')->findOrFail($id);
-        $Votopro = new Votoproducto();
-        if ($pro->votoproductos()->save($Votopro)) {
+        $pro = Producto::with('dislikeproductos')->findOrFail($id);
+        $dispro = new Dislikeproducto();
+        if ($pro->dislikeproductos()->save($dispro)) {
 
             return response()->json('Voto registrado!', 201);
         }
@@ -53,10 +53,10 @@ class VotoproductoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Votoproducto  $votoproducto
+     * @param  \App\Dislikeproducto  $dislikeproducto
      * @return \Illuminate\Http\Response
      */
-    public function show(Votoproducto $votoproducto)
+    public function show(Dislikeproducto $dislikeproducto)
     {
         //
     }
@@ -64,10 +64,10 @@ class VotoproductoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Votoproducto  $votoproducto
+     * @param  \App\Dislikeproducto  $dislikeproducto
      * @return \Illuminate\Http\Response
      */
-    public function edit(Votoproducto $votoproducto)
+    public function edit(Dislikeproducto $dislikeproducto)
     {
         //
     }
@@ -76,10 +76,10 @@ class VotoproductoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Votoproducto  $votoproducto
+     * @param  \App\Dislikeproducto  $dislikeproducto
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Votoproducto $votoproducto)
+    public function update(Request $request, Dislikeproducto $dislikeproducto)
     {
         //
     }
@@ -87,11 +87,27 @@ class VotoproductoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Votoproducto  $votoproducto
+     * @param  \App\Dislikeproducto  $dislikeproducto
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Votoproducto $votoproducto)
+    public function destroy(Dislikeproducto $dislikeproducto)
     {
         //
+    }
+
+    public function responseErrors($errors, $statusHTML)
+    {
+        $transformed = [];
+
+        foreach ($errors as $field => $message) {
+            $transformed[] = [
+                'field' => $field,
+                'message' => $message[0]
+            ];
+        }
+
+        return response()->json([
+            'errors' => $transformed
+        ], $statusHTML);
     }
 }
