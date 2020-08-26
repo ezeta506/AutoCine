@@ -13,55 +13,55 @@ class DislikepeliculaSeeder extends Seeder
     {
 
         $like = new \App\Dislikepelicula();
-        $like->producto_id = 1;
+        $like->pelicula_id = 1;
         $like->save();
 
         $like = new \App\Dislikepelicula();
-        $like->producto_id = 1;
+        $like->pelicula_id = 1;
         $like->save();
 
         $like = new \App\Dislikepelicula();
-        $like->producto_id = 1;
+        $like->pelicula_id = 1;
         $like->save();
 
         $like = new \App\Dislikepelicula();
-        $like->producto_id = 1;
+        $like->pelicula_id = 1;
         $like->save();
 
         $like = new \App\Dislikepelicula();
-        $like->producto_id = 1;
+        $like->pelicula_id = 1;
         $like->save();
 
         $like = new \App\Dislikepelicula();
-        $like->producto_id = 2;
+        $like->pelicula_id = 2;
         $like->save();
 
         $like = new \App\Dislikepelicula();
-        $like->producto_id = 3;
+        $like->pelicula_id = 3;
         $like->save();
 
         $like = new \App\Dislikepelicula();
-        $like->producto_id = 4;
+        $like->pelicula_id = 4;
         $like->save();
 
         $like = new \App\Dislikepelicula();
-        $like->producto_id = 4;
+        $like->pelicula_id = 4;
         $like->save();
 
         $like = new \App\Dislikepelicula();
-        $like->producto_id = 4;
+        $like->pelicula_id = 4;
         $like->save();
 
         $like = new \App\Dislikepelicula();
-        $like->producto_id = 4;
+        $like->pelicula_id = 4;
         $like->save();
 
         $like = new \App\Dislikepelicula();
-        $like->producto_id = 4;
+        $like->pelicula_id = 4;
         $like->save();
 
         $like = new \App\Dislikepelicula();
-        $like->producto_id = 4;
+        $like->pelicula_id = 4;
         $like->save();
     }
 }

@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class votoproductoSeeder extends Seeder
+class VotoproductoSeeder extends Seeder
 {
     /**
      * Run the database seeds.
